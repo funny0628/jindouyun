@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>筋斗云案例</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .outbox {
+        width: 800px;
+        height: 50px;
+        border: 1px solid #ccc;
+        margin-top: 100px;
+        margin-left: 100px;
+        position: relative;
+
+    }
+    ul {
+       width: 100%;
+       height: 100%;
+        position: absolute;
+        z-index: 999;
+        list-style: none;
+        display: flex
+    }
+    ul li {
+        flex: 1;
+        text-align: center;
+        line-height: 50px;
+    }
+    img {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100px;
+        height: 50px;
+    }
+    </style>
+</head>
+<body>
+    <div class="outbox">
+        <ul>
+            <li>北京</li>
+            <li>上海</li>
+            <li>深圳</li>
+            <li>武汉</li>
+            <li>重庆</li>
+            <li>南京</li>
+            <li>杭州</li>
+            <li>苏州</li>
+        </ul>
+        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582914854496&di=f1cb80d43d5309ab4c01d0fd2bed9de3&imgtype=0&src=http%3A%2F%2Fdl.ppt123.net%2Fpptbj%2F201203%2F2012032518061753.jpg" alt="">
+    </div>
+</body>
+</html>
+<script src="./animate.js"></script>
+<script>
+var outbox = document.getElementsByClassName('outbox')[0];
+var img = document.getElementsByTagName('img')[0];
+var lilist = document.getElementsByTagName('li');
+
+var home = lilist[0];
+for(var i = 0;i<lilist.length;i++){
+    lilist[i].setAttribute('index',i)
+    lilist[i].onmouseover = function(){
+        console.log(this.getAttribute('index'));
+        for(var j = 0;j<lilist.length;j++){
+            if(this.getAttribute('index') == j){
+                slowanimationMove(img,this.offsetLeft)
+            }
+        }     
+    }
+    lilist[i].onmouseout = function(){
+        slowanimationMove(img,home.offsetLeft)
+    }
+
+    lilist[i].onclick = function(){
+       
+        home = this
+    }
+}
+</script>
